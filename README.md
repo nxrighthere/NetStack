@@ -70,6 +70,8 @@ for (int i = 0; i < buffer.Length; i++) {
 	message.data[i] = data++;
 }
 
+buffers.Return(message.data);
+
 // Release pooled object
 messages.Release(message);
 ```
