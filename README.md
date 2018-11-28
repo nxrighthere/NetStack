@@ -17,13 +17,21 @@ Modules:
 - Serialization
   - Fast processing
   - Lightweight and straightforward
-  - Compact bit-packing
   - Fluent builder
+  - Compact bit-packing
+    - ZigZag encoding
+    - Elastic encoding
 - Threading
   - Concurrent objects buffer
+    - Multi-producer multi-consumer first-in-first-out non-blocking queue
   - Concurrent objects pool
+    - Self-stabilizing semi-lockless circular buffer
 - Unsafe
   - Fast memory copying
+
+Building
+--------
+
 
 Usage
 --------
