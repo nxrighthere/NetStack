@@ -44,10 +44,10 @@ namespace NetStack.Threading {
 
 		public ConcurrentBuffer(int bufferSize) {
 			if (bufferSize < 2)
-                throw new ArgumentException("bufferSize");
+				throw new ArgumentException("bufferSize");
 
 			if ((bufferSize & (bufferSize - 1)) != 0)
-                throw new ArgumentException("bufferSize");
+				throw new ArgumentException("bufferSize");
 
 			_bufferMask = bufferSize - 1;
 			_buffer = new Cell[bufferSize];
