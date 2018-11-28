@@ -160,6 +160,9 @@ data.AddUInt(peer)
 .AddInt(compressedRotation.c)
 .ToArray(buffer);
 
+// Get buffer length
+Console.WriteLine("Bit buffer length: " + data.Length);
+
 // Reset bit buffer for further reusing
 data.Clear();
 
