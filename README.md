@@ -162,7 +162,7 @@ string name = data.ReadString();
 bool accelerated = data.ReadBool();
 ushort speed = (ushort)data.ReadUInt();
 CompressedVector3 position = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
-CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), data.ReadInt(), data.ReadInt(), data.ReadInt());
+CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), (short)data.ReadInt(), (short)data.ReadInt(), (short)data.ReadInt());
 ```
 
 API reference
