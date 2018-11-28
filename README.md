@@ -11,9 +11,9 @@ Modules:
 - Buffers
   - Thread-safe arrays pool
 - Compression
-  - Half precision algorithm
-  - Bounded range algorithm
-  - Smallest three algorithm
+  - [Half precision](https://en.wikipedia.org/wiki/Half-precision_floating-point_format) algorithm
+  - [Bounded range](https://gafferongames.com/post/snapshot_compression/#optimizing-position) algorithm
+  - [Smallest three](https://gafferongames.com/post/snapshot_compression/#optimizing-orientation) algorithm
 - Serialization
   - Fast processing
   - Lightweight and straightforward
@@ -117,7 +117,6 @@ Console.WriteLine("Compressed position - X: " + compressedPosition.x + ", Y:" + 
 
 // Decompress position data
 Vector3 decompressedPosition = BoundedRange.Decompress(compressedPosition, worldBounds);
-
 ```
 
 ##### Compress quaternions:
@@ -162,8 +161,8 @@ uint peer = data.ReadUInt();
 string name = data.ReadString();
 bool accelerated = data.ReadBool();
 ushort speed = (ushort)data.ReadUInt();
-CompressedVector3 = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
-CompressedQuaternion = new CompressedQuaternion(data.ReadByte(), data.ReadInt(), data.ReadInt(), data.ReadInt());
+CompressedVector3 position = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
+CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), data.ReadInt(), data.ReadInt(), data.ReadInt());
 ```
 
 API reference
