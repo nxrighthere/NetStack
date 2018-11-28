@@ -4,7 +4,7 @@
 
 [![PayPal](https://drive.google.com/uc?id=1OQrtNBVJehNVxgPf6T6yX1wIysz1ElLR)](https://www.paypal.me/nxrighthere) [![Bountysource](https://drive.google.com/uc?id=19QRobscL8Ir2RL489IbVjcw3fULfWS_Q)](https://salt.bountysource.com/checkout/amount?team=nxrighthere) [![Discord](https://discordapp.com/api/guilds/515987760281288707/embed.png)](https://discord.gg/ceaWXVw)
 
-NetStack is a lightweight toolset for creating multiplayer games.
+Lightweight toolset for creating concurrent networking systems for multiplayer games.
 
 
 
@@ -74,10 +74,45 @@ while (conveyor.TryDequeue(out element)) {
 }
 ```
 
-##### Compress data:
+##### Compress floats:
 ```c#
-// 
+// Compress data
+ushort compressedSpeed = HalfPrecision.Compress(speed);
 
+// Decompress data
+float speed = HalfPrecision.Decompress(compressedSpeed);
+```
+
+##### Compress vectors:
+```c#
+// Create a new BoundedRange array for Vector3 position, each entry has bounds and precision
+BoundedRange[] worldBounds = new BoundedRange[3];
+
+worldBounds[0] = new BoundedRange(-50f, 50f, 0.05f); // X axis
+worldBounds[1] = new BoundedRange(0f, 25f, 0.05f); // Y axis
+worldBounds[2] = new BoundedRange(-50f, 50f, 0.05f); // Z axis
+
+// Compress position data
+CompressedVector3 compressedPosition = BoundedRange.Compress(position, worldBounds);
+
+// Read compressed data
+Console.WriteLine("Compressed position - X: " + compressedPosition.x + ", Y:" + compressedPosition.y + ", Z:" + compressedPosition.z);
+
+// Decompress position data
+Vector3 decompressedPosition = BoundedRange.Decompress(compressedPosition, worldBounds);
+
+```
+
+##### Compress quaternions:
+```c#
+// Compress rotation data
+CompressedQuaternion compressedRotation = SmallestThree.Compress(rotation);
+
+// Read compressed data
+Console.WriteLine("Compressed rotation - M: " + compressedRotation.m + ", A:" + compressedRotation.a + ", B:" + compressedRotation.b + ", C:" + compressedRotation.c);
+
+// Decompress rotation data
+Quaternion rotation = SmallestThree.Decompress(compressedRotation);
 ```
 
 ##### Serialize data:
