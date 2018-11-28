@@ -132,7 +132,7 @@ Console.WriteLine("Compressed rotation - M: " + compressedRotation.m + ", A:" + 
 Quaternion rotation = SmallestThree.Decompress(compressedRotation);
 ```
 
-##### Serialize data:
+##### Serialize/deserialize data:
 ```c#
 // Create a new bit buffer with 64 chunks
 BitBuffer data = new BitBuffer(64);
@@ -159,6 +159,7 @@ data.FromArray(buffer, length);
 
 // Unload the bit buffer in the same order
 uint peer = data.ReadUInt();
+string name = data.ReadString();
 bool accelerated = data.ReadBool();
 ushort speed = (ushort)data.ReadUInt();
 CompressedVector3 = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
