@@ -93,7 +93,7 @@ while (conveyor.TryDequeue(out element)) {
 }
 ```
 
-##### Compress floats:
+##### Compress float:
 ```c#
 // Compress data
 ushort compressedSpeed = HalfPrecision.Compress(speed);
@@ -102,7 +102,7 @@ ushort compressedSpeed = HalfPrecision.Compress(speed);
 float speed = HalfPrecision.Decompress(compressedSpeed);
 ```
 
-##### Compress vectors:
+##### Compress vector:
 ```c#
 // Create a new BoundedRange array for Vector3 position, each entry has bounds and precision
 BoundedRange[] worldBounds = new BoundedRange[3];
@@ -121,7 +121,7 @@ Console.WriteLine("Compressed position - X: " + compressedPosition.x + ", Y:" + 
 Vector3 decompressedPosition = BoundedRange.Decompress(compressedPosition, worldBounds);
 ```
 
-##### Compress quaternions:
+##### Compress quaternion:
 ```c#
 // Compress rotation data
 CompressedQuaternion compressedRotation = SmallestThree.Compress(rotation);
