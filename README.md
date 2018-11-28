@@ -6,7 +6,24 @@
 
 Lightweight toolset for creating concurrent networking systems for multiplayer games.
 
+Modules:
 
+- Buffers
+  - Thread-safe arrays pool
+- Compression
+  - Half precision algorithm
+  - Bounded range algorithm
+  - Smallest three algorithm
+- Serialization
+  - Fast processing
+  - Lightweight and straightforward
+  - Compact bit-packing
+  - Fluent builder
+- Threading
+  - Concurrent objects buffer
+  - Concurrent objects pool
+- Unsafe
+  - Fast memory copying
 
 Usage
 --------
@@ -64,7 +81,7 @@ ConcurrentBuffer conveyor = new ConcurrentBuffer(8192);
 
 // Enqueue an object
 if (!conveyor.TryEnqueue(message))
-	Console.WriteLine("Buffer is full!");
+	Console.WriteLine("Conveyor is full!");
 
 // Dequeue all objects
 object element;
@@ -117,8 +134,35 @@ Quaternion rotation = SmallestThree.Decompress(compressedRotation);
 
 ##### Serialize data:
 ```c#
-// 
+// Create a new bit buffer with 64 chunks
+BitBuffer data = new BitBuffer(64);
 
+// Fill the bit buffer and serialize data to a byte array
+data.AddUInt(peer)
+.AddString(name)
+.AddBool(accelerated)
+.AddUInt(speed)
+.AddUInt(compressedPosition.x)
+.AddUInt(compressedPosition.y)
+.AddUInt(compressedPosition.z)
+.AddByte(compressedRotation.m)
+.AddInt(compressedRotation.a)
+.AddInt(compressedRotation.b)
+.AddInt(compressedRotation.c)
+.ToArray(buffer);
+
+// Reset bit buffer for further reusing
+data.Clear();
+
+// Deserialize data from a byte array
+data.FromArray(buffer, length);
+
+// Unload the bit buffer in the same order
+uint peer = data.ReadUInt();
+bool accelerated = data.ReadBool();
+ushort speed = (ushort)data.ReadUInt();
+CompressedVector3 = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
+CompressedQuaternion = new CompressedQuaternion(data.ReadByte(), data.ReadInt(), data.ReadInt(), data.ReadInt());
 ```
 
 API reference
