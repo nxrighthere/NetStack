@@ -133,8 +133,8 @@ Quaternion rotation = SmallestThree.Decompress(compressedRotation);
 
 ##### Serialize/deserialize data:
 ```c#
-// Create a new bit buffer with 64 chunks
-BitBuffer data = new BitBuffer(64);
+// Create a new bit buffer with 128 chunks
+BitBuffer data = new BitBuffer(128);
 
 // Fill the bit buffer and serialize data to a byte array
 data.AddUInt(peer)
