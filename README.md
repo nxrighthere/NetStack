@@ -136,7 +136,7 @@ Quaternion rotation = SmallestThree.Decompress(compressedRotation);
 // Create a new bit buffer with 128 chunks
 BitBuffer data = new BitBuffer(128);
 
-// Fill the bit buffer and serialize data to a byte array
+// Fill bit buffer and serialize data to a byte array
 data.AddUInt(peer)
 .AddString(name)
 .AddBool(accelerated)
@@ -156,7 +156,7 @@ data.Clear();
 // Deserialize data from a byte array
 data.FromArray(buffer, length);
 
-// Unload the bit buffer in the same order
+// Unload bit buffer in the same order
 uint peer = data.ReadUInt();
 string name = data.ReadString();
 bool accelerated = data.ReadBool();
