@@ -58,7 +58,7 @@ namespace NetStack.Buffers {
 
 	internal static class Log {
 		private static string Output(string module, string message) {
-			return DateTime.Now.ToString("[HH:mm:ss]") + " [ScionNet." + module + "] " + message;
+			return DateTime.Now.ToString("[HH:mm:ss]") + " [NetStack." + module + "] " + message;
 		}
 
 		public static void Info(string module, string message) {
