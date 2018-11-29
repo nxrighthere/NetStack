@@ -33,7 +33,7 @@ Building
 --------
 By default, all scripts are compiled for .NET Framework 3.5. Define `NET_4_6` directive to build the assembly for .NET Framework 4.6 or higher. Define `NET_STANDARD_2_0` to build the assembly for .NET Core.
 
-Define `NETSTACK_INLINING` to enable aggressive inlining for performance sensitive functionality.
+Define `NETSTACK_INLINING` to enable aggressive inlining for performance critical functionality.
 
 Define `NETSTACK_BUFFERS_LOG` to enable buffers logging.
 
