@@ -181,25 +181,3 @@ ushort speed = (ushort)data.ReadUInt();
 CompressedVector3 position = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
 CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), (short)data.ReadInt(), (short)data.ReadInt(), (short)data.ReadInt());
 ```
-
-API reference
---------
-
-### Buffers
-
-
-
-### Compression
-
-
-
-### Serialization
-
-
-
-### Threading
-
-
-
-### Unsafe
-
