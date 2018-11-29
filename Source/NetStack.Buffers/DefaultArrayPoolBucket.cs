@@ -29,7 +29,7 @@ namespace NetStack.Buffers {
 		private sealed class Bucket {
 			internal readonly int _bufferLength;
 			private readonly T[][] _buffers;
-			#if NETSTACK_BUFFERS_LOG_BUFFERS_LOG
+			#if NETSTACK_BUFFERS_LOG
 				private readonly int _poolId;
 			#endif
 			#if NET_4_6 || NET_STANDARD_2_0
@@ -48,7 +48,7 @@ namespace NetStack.Buffers {
 				_buffers = new T[numberOfBuffers][];
 				_bufferLength = bufferLength;
 
-				#if NETSTACK_BUFFERS_LOG_BUFFERS_LOG
+				#if NETSTACK_BUFFERS_LOG
 					_poolId = poolId;
 				#endif
 			}
@@ -104,7 +104,7 @@ namespace NetStack.Buffers {
 				if (allocateBuffer) {
 					buffer = new T[_bufferLength];
 
-					#if NETSTACK_BUFFERS_LOG_BUFFERS_LOG
+					#if NETSTACK_BUFFERS_LOG
 						var log = ArrayPoolEventSource.EventLog;
 
 						log.BufferAllocated(buffer.GetHashCode(), _bufferLength, _poolId, Id, ArrayPoolEventSource.BufferAllocatedReason.Pooled);
