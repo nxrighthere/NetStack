@@ -117,7 +117,7 @@ namespace NetStack.Serialization {
 
 		public void Add(int numBits, uint value) {
 			if (numBits < 0)
-				throw new ArgumentOutOfRangeException("Pushing negatve bits");
+				throw new ArgumentOutOfRangeException("Pushing negative bits");
 
 			if (numBits > 32)
 				throw new ArgumentOutOfRangeException("Pushing too many bits");
@@ -148,7 +148,7 @@ namespace NetStack.Serialization {
 
 		public uint Peek(int numBits) {
 			if (numBits < 0)
-				throw new ArgumentOutOfRangeException("Pushing negatve bits");
+				throw new ArgumentOutOfRangeException("Pushing negative bits");
 
 			if (numBits > 32)
 				throw new ArgumentOutOfRangeException("Pushing too many bits");
