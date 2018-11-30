@@ -6,7 +6,7 @@
 
 Lightweight toolset for creating concurrent networking systems for multiplayer games.
 
-NetStack is self-contained and doesn't require any dependencies.
+NetStack is self-contained and has no dependencies.
 
 Modules:
 
