@@ -17,8 +17,8 @@ Modules:
   - [Bounded range](https://gafferongames.com/post/snapshot_compression/#optimizing-position) algorithm
   - [Smallest three](https://gafferongames.com/post/snapshot_compression/#optimizing-orientation) algorithm
 - Serialization
-  - Fast processing
   - Lightweight and straightforward
+  - Fast processing
   - Fluent builder
   - Compact bit-packing
     - ZigZag encoding
