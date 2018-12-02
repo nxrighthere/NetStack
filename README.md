@@ -166,7 +166,7 @@ data.AddUInt(peer)
 .AddInt(compressedRotation.c)
 .ToArray(buffer);
 
-// Get buffer length
+// Get data length in bit buffer
 Console.WriteLine("Bit buffer length: " + data.Length);
 
 // Reset bit buffer for further reusing
@@ -183,6 +183,6 @@ ushort speed = (ushort)data.ReadUInt();
 CompressedVector3 position = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
 CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), (short)data.ReadInt(), (short)data.ReadInt(), (short)data.ReadInt());
 
-// Check if buffer is fully unloaded
+// Check if bit buffer is fully unloaded
 Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
 ```
