@@ -103,9 +103,8 @@ namespace NetStack.Serialization {
 				throw new Exception("Cannot convert to ASCII: " + character);
 			}
 
-			if (value > 127) {
+			if (value > 127)
 				throw new Exception("Cannot convert to ASCII: " + character);
-			}
 
 			return value;
 		}
