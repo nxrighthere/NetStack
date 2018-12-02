@@ -11,7 +11,7 @@ NetStack is self-contained and has no dependencies.
 Modules:
 
 - Buffers
-  - Thread-safe [arrays pool](https://adamsitnik.com/Array-Pool/)
+  - Thread-safe [array pool](https://adamsitnik.com/Array-Pool/)
 - Compression
   - [Half precision](https://en.wikipedia.org/wiki/Half-precision_floating-point_format) algorithm
   - [Bounded range](https://gafferongames.com/post/snapshot_compression/#optimizing-position) algorithm
