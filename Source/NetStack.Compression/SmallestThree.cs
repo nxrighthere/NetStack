@@ -52,7 +52,7 @@ namespace NetStack.Compression {
 			float maxValue = float.MinValue;
 			float sign = 1f;
 
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i <= 3; i++) {
 				float element = 0f;
 				float abs = 0f;
 
