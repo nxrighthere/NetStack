@@ -67,9 +67,8 @@ namespace NetStack.Compression {
 			}
 
 			if (e == 0xff - (127 - 15)) {
-				if (m == 0) {
+				if (m == 0)
 					return (ushort)(s | 0x7c00);
-				}
 
 				m >>= 13;
 
