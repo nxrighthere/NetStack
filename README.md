@@ -21,7 +21,7 @@ Modules:
   - Fast processing
   - Fluent builder
   - Compact bit-packing
-    - ZigZag encoding
+    - [ZigZag](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers) encoding
     - Elastic encoding
 - Threading
   - Concurrent objects buffer
