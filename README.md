@@ -19,7 +19,8 @@ Modules:
 - Serialization
   - Lightweight and straightforward
   - Fast processing
-  - Fluent builder
+  - [Span](https://msdn.microsoft.com/en-us/magazine/mt814808.aspx) support
+  - [Fluent builder](http://www.stefanoricciardi.com/2010/04/14/a-fluent-builder-in-c/) support
   - Compact bit-packing
     - [ZigZag](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers) encoding
     - Elastic encoding
@@ -36,6 +37,8 @@ Building
 By default, all scripts are compiled for .NET Framework 3.5. Define `NET_4_6` directive to build the assembly for .NET Framework 4.6 or higher. Define `NET_STANDARD_2_0` to build the assembly for .NET Core 2.1 or higher.
 
 Define `NETSTACK_INLINING` to enable aggressive inlining for performance critical functionality.
+
+Define `NETSTACK_SPAN` to enable support for Span.
 
 Define `NETSTACK_BUFFERS_LOG` to enable buffers logging.
 
