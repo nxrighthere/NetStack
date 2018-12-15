@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (c) 2018 Stanislav Denisov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -202,6 +202,45 @@ namespace NetStack.Serialization {
 			nextPosition = ((length - 1) * 8) + (positionInByte - 1);
 			readPosition = 0;
 		}
+
+		#if NETSTACK_SPAN
+			public int ToSpan(ref Span<byte> data) {
+				Add(1, 1);
+
+				int numChunks = (nextPosition >> 5) + 1;
+
+				for (int i = 0; i < numChunks; i++) {
+					int dataIdx = i * 4;
+					uint chunk = chunks[i];
+
+					data[dataIdx] = (byte)(chunk);
+					data[dataIdx + 1] = (byte)(chunk >> 8);
+					data[dataIdx + 2] = (byte)(chunk >> 16);
+					data[dataIdx + 3] = (byte)(chunk >> 24);
+				}
+
+				return Length;
+			}
+
+			public void FromSpan(ref ReadOnlySpan<byte> data, int length) {
+				int numChunks = (length / 4) + 1;
+
+				if (chunks.Length < numChunks)
+					chunks = new uint[numChunks];
+
+				for (int i = 0; i < numChunks; i++) {
+					int dataIdx = i * 4;
+					uint chunk = (uint)data[dataIdx] | (uint)data[dataIdx + 1] << 8 | (uint)data[dataIdx + 2] << 16 | (uint)data[dataIdx + 3] << 24;
+
+					chunks[i] = chunk;
+				}
+
+				int positionInByte = FindHighestBitPosition(data[length - 1]);
+
+				nextPosition = ((length - 1) * 8) + (positionInByte - 1);
+				readPosition = 0;
+			}
+		#endif
 
 		#if NETSTACK_INLINING
 			[MethodImpl(256)]
