@@ -167,9 +167,9 @@ data.AddUInt(peer)
 .AddInt(compressedRotation.a)
 .AddInt(compressedRotation.b)
 .AddInt(compressedRotation.c)
-.ToArray(buffer);
+.ToArray(buffer); // The length of the byte array should be data.Length + 4 bytes for conversion
 
-// Get data length in bit buffer
+// Get data length in bit buffer for sending through the network
 Console.WriteLine("Bit buffer length: " + data.Length);
 
 // Reset bit buffer for further reusing
