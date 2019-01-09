@@ -65,7 +65,7 @@ namespace NetStack.Threading {
 				if (TryEnqueue(item))
 					break;
 
-				Thread.Sleep(1);
+				Thread.SpinWait(1);
 			}
 		}
 
