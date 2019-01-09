@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (c) 2018 Alexander Nikitin, Stanislav Denisov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -60,6 +60,15 @@ namespace NetStack.Threading {
 			_dequeuePos = 0;
 		}
 
+		public void Enqueue(object item) {
+			while (true) {
+				if (TryEnqueue(item))
+					break;
+
+				Thread.Sleep(1);
+			}
+		}
+
 		public bool TryEnqueue(object item) {
 			do {
 				var buffer = _buffer;
@@ -85,6 +94,15 @@ namespace NetStack.Threading {
 			}
 
 			while (true);
+		}
+
+		public object Dequeue() {
+			while (true) {
+				object element;
+
+				if (TryDequeue(out element))
+					return element;
+			}
 		}
 
 		public bool TryDequeue(out object result) {
