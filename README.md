@@ -99,14 +99,10 @@ messages.Release(message);
 ConcurrentBuffer conveyor = new ConcurrentBuffer(8192);
 
 // Enqueue an object
-if (!conveyor.TryEnqueue(message))
-	Console.WriteLine("Conveyor is full!");
+conveyor.Enqueue(message);
 
-// Dequeue all objects
-object element;
-
-while (conveyor.TryDequeue(out element)) {
-	MessageObject message = (MessageObject)element;
+// Dequeue object
+MessageObject message = (MessageObject)conveyor.Dequeue();
 }
 ```
 
