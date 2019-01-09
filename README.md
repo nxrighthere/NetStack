@@ -63,7 +63,7 @@ for (int i = 0; i < buffer.Length; i++) {
 buffers.Return(buffer);
 ```
 
-##### Concurrent objects pooling:
+##### Concurrent objects pool:
 ```c#
 // Define a message object
 class MessageObject {
