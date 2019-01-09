@@ -103,7 +103,6 @@ conveyor.Enqueue(message);
 
 // Dequeue object
 MessageObject message = (MessageObject)conveyor.Dequeue();
-}
 ```
 
 ##### Compress float:
