@@ -165,7 +165,7 @@ data.AddUInt(peer)
 .ToArray(buffer); // The length of the byte array should be at least data.Capacity for conversion
 
 // Get a length of actual data in bit buffer for sending through the network
-Console.WriteLine("Bit buffer length: " + data.Length);
+Console.WriteLine("Data length: " + data.Length);
 
 // Reset bit buffer for further reusing
 data.Clear();
