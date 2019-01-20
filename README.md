@@ -154,14 +154,14 @@ BitBuffer data = new BitBuffer(128);
 data.AddUInt(peer)
 .AddString(name)
 .AddBool(accelerated)
-.AddUInt(speed)
+.AddUShort(speed)
 .AddUInt(compressedPosition.x)
 .AddUInt(compressedPosition.y)
 .AddUInt(compressedPosition.z)
 .AddByte(compressedRotation.m)
-.AddInt(compressedRotation.a)
-.AddInt(compressedRotation.b)
-.AddInt(compressedRotation.c)
+.AddShort(compressedRotation.a)
+.AddShort(compressedRotation.b)
+.AddShort(compressedRotation.c)
 .ToArray(buffer); // The length of the byte array should be at least data.Length + 4 bytes for conversion
 
 // Get data length in bit buffer for sending through the network
@@ -177,9 +177,9 @@ data.FromArray(buffer, length);
 uint peer = data.ReadUInt();
 string name = data.ReadString();
 bool accelerated = data.ReadBool();
-ushort speed = (ushort)data.ReadUInt();
+ushort speed = data.ReadUShort();
 CompressedVector3 position = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
-CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), (short)data.ReadInt(), (short)data.ReadInt(), (short)data.ReadInt());
+CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), data.ReadShort(), data.ReadShort(), data.ReadShort());
 
 // Check if bit buffer is fully unloaded
 Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
