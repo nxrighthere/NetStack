@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (c) 2018 Stanislav Denisov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -48,8 +48,8 @@ namespace NetStack.Compression {
 
 		public static ushort Compress(int value) {
 			int s = (value >> 16) & 0x00008000;
-			int e = ((value >> 23) & 0x000000ff) - (127 - 15);
-			int m = value & 0x007fffff;
+			int e = ((value >> 23) & 0X000000FF) - (127 - 15);
+			int m = value & 0X007FFFFF;
 
 			if (e <= 0) {
 				if (e < -10)
@@ -66,16 +66,16 @@ namespace NetStack.Compression {
 				return (ushort)(s | m);
 			}
 
-			if (e == 0xff - (127 - 15)) {
+			if (e == 0XFF - (127 - 15)) {
 				if (m == 0)
-					return (ushort)(s | 0x7c00);
+					return (ushort)(s | 0X7C00);
 
 				m >>= 13;
 
-				return (ushort)(s | 0x7c00 | m | ((m == 0) ? 1 : 0));
+				return (ushort)(s | 0X7C00 | m | ((m == 0) ? 1 : 0));
 			}
 
-			m = m + 0x00000fff + ((m >> 13) & 1);
+			m = m + 0X00000FFF + ((m >> 13) & 1);
 
 			if ((m & 0x00800000) != 0) {
 				m = 0;
@@ -83,7 +83,7 @@ namespace NetStack.Compression {
 			}
 
 			if (e > 30)
-				return (ushort)(s | 0x7c00);
+				return (ushort)(s | 0X7C00);
 
 			return (ushort)(s | (e << 10) | (m >> 13));
 		}
@@ -91,7 +91,7 @@ namespace NetStack.Compression {
 		public static float Decompress(ushort value) {
 			uint result;
 			uint mantissa = (uint)(value & 1023);
-			uint exponent = 0xfffffff2;
+			uint exponent = 0XFFFFFFF2;
 
 			if ((value & -33792) == 0) {
 				if (mantissa != 0) {
@@ -100,13 +100,13 @@ namespace NetStack.Compression {
 						mantissa = mantissa << 1;
 					}
 
-					mantissa &= 0xfffffbff;
+					mantissa &= 0XFFFFFBFF;
 					result = ((uint)((((uint)value & 0x8000) << 16) | ((exponent + 127) << 23))) | (mantissa << 13);
 				} else {
 					result = (uint)((value & 0x8000) << 16);
 				}
 			} else {
-				result = ((((uint)value & 0x8000) << 16) | ((((((uint)value >> 10) & 0x1f) - 15) + 127) << 23)) | (mantissa << 13);
+				result = ((((uint)value & 0x8000) << 16) | ((((((uint)value >> 10) & 0X1F) - 15) + 127) << 23)) | (mantissa << 13);
 			}
 
 			var values = new Values {
