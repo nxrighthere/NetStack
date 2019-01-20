@@ -23,7 +23,7 @@ Modules:
   - [Fluent builder](http://www.stefanoricciardi.com/2010/04/14/a-fluent-builder-in-c/) support
   - Compact bit-packing
     - [ZigZag](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers) encoding
-    - [Elastic](https://gist.github.com/nxrighthere/9c182db3697516abc97feaca0f997dab) encoding
+    - [Variable-length](https://rosettacode.org/wiki/Variable-length_quantity) encoding
 - Threading
   - Concurrent objects buffer
     - Multi-producer multi-consumer first-in-first-out non-blocking queue
