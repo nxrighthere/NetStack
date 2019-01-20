@@ -67,6 +67,12 @@ namespace NetStack.Serialization {
 			}
 		}
 
+		public int Capacity {
+			get {
+				return Length + 4;
+			}
+		}
+
 		public bool IsFinished {
 			get {
 				return nextPosition == readPosition;
