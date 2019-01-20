@@ -67,12 +67,6 @@ namespace NetStack.Serialization {
 			}
 		}
 
-		public int Capacity {
-			get {
-				return Length + 4;
-			}
-		}
-
 		public bool IsFinished {
 			get {
 				return nextPosition == readPosition;
@@ -176,15 +170,23 @@ namespace NetStack.Serialization {
 			Add(1, 1);
 
 			int numChunks = (nextPosition >> 5) + 1;
+			int length = data.Length;
 
 			for (int i = 0; i < numChunks; i++) {
 				int dataIdx = i * 4;
 				uint chunk = chunks[i];
 
-				data[dataIdx] = (byte)(chunk);
-				data[dataIdx + 1] = (byte)(chunk >> 8);
-				data[dataIdx + 2] = (byte)(chunk >> 16);
-				data[dataIdx + 3] = (byte)(chunk >> 24);
+				if (dataIdx < length)
+					data[dataIdx] = (byte)(chunk);
+
+				if (dataIdx + 1 < length)
+					data[dataIdx + 1] = (byte)(chunk >> 8);
+
+				if (dataIdx + 2 < length)
+					data[dataIdx + 2] = (byte)(chunk >> 16);
+
+				if (dataIdx + 3 < length)
+					data[dataIdx + 3] = (byte)(chunk >> 24);
 			}
 
 			return Length;
@@ -198,7 +200,19 @@ namespace NetStack.Serialization {
 
 			for (int i = 0; i < numChunks; i++) {
 				int dataIdx = i * 4;
-				uint chunk = (uint)data[dataIdx] | (uint)data[dataIdx + 1] << 8 | (uint)data[dataIdx + 2] << 16 | (uint)data[dataIdx + 3] << 24;
+				uint chunk = 0;
+
+				if (dataIdx < length)
+					chunk = (uint)data[dataIdx];
+
+				if (dataIdx + 1 < length)
+					chunk = chunk | (uint)data[dataIdx + 1] << 8;
+
+				if (dataIdx + 2 < length)
+					chunk = chunk | (uint)data[dataIdx + 2] << 16;
+
+				if (dataIdx + 3 < length)
+					chunk = chunk | (uint)data[dataIdx + 3] << 24;
 
 				chunks[i] = chunk;
 			}
@@ -214,15 +228,23 @@ namespace NetStack.Serialization {
 				Add(1, 1);
 
 				int numChunks = (nextPosition >> 5) + 1;
+				int length = data.Length;
 
 				for (int i = 0; i < numChunks; i++) {
 					int dataIdx = i * 4;
 					uint chunk = chunks[i];
 
-					data[dataIdx] = (byte)(chunk);
-					data[dataIdx + 1] = (byte)(chunk >> 8);
-					data[dataIdx + 2] = (byte)(chunk >> 16);
-					data[dataIdx + 3] = (byte)(chunk >> 24);
+					if (dataIdx < length)
+						data[dataIdx] = (byte)(chunk);
+
+					if (dataIdx + 1 < length)
+						data[dataIdx + 1] = (byte)(chunk >> 8);
+
+					if (dataIdx + 2 < length)
+						data[dataIdx + 2] = (byte)(chunk >> 16);
+
+					if (dataIdx + 3 < length)
+						data[dataIdx + 3] = (byte)(chunk >> 24);
 				}
 
 				return Length;
@@ -236,7 +258,19 @@ namespace NetStack.Serialization {
 
 				for (int i = 0; i < numChunks; i++) {
 					int dataIdx = i * 4;
-					uint chunk = (uint)data[dataIdx] | (uint)data[dataIdx + 1] << 8 | (uint)data[dataIdx + 2] << 16 | (uint)data[dataIdx + 3] << 24;
+					uint chunk = 0;
+
+					if (dataIdx < length)
+						chunk = (uint)data[dataIdx];
+
+					if (dataIdx + 1 < length)
+ 						chunk = chunk | (uint)data[dataIdx + 1] << 8;
+
+					if (dataIdx + 2 < length)
+						chunk = chunk | (uint)data[dataIdx + 2] << 16;
+
+					if (dataIdx + 3 < length)
+						chunk = chunk | (uint)data[dataIdx + 3] << 24;
 
 					chunks[i] = chunk;
 				}
