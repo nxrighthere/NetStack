@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (c) 2018 Stanislav Denisov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -89,7 +89,7 @@ namespace NetStack.Compression {
 			mask = (uint)((1L << requiredBits) - 1);
 		}
 
-		public int Log2(uint value) {
+		private int Log2(uint value) {
 			value |= value >> 1;
 			value |= value >> 2;
 			value |= value >> 4;
