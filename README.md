@@ -204,7 +204,6 @@ static class BufferPool {
 struct MessageObject {
 	uint peer;
 	byte race;
-	byte class;
 	ushort skin;
 
 	public void Serialize(ref Span<byte> packet) {
@@ -212,11 +211,10 @@ struct MessageObject {
 
 		data.AddUInt(peer)
 		.AddByte(race)
-		.AddByte(class)
 		.AddUShort(skin)
 		.ToSpan(ref packet);
 
-		data.Clear()
+		data.Clear();
 	}
 
 	public void Deserialize(ref ReadOnlySpan<byte> packet, int length) {
@@ -226,7 +224,6 @@ struct MessageObject {
 
 		peer = data.ReadUInt();
 		race = data.ReadByte();
-		class = data.ReadByte();
 		skin = data.ReadUShort();
 
 		data.Clear();
