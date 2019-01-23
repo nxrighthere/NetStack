@@ -188,7 +188,7 @@ Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
 ##### Abstract data serialization with Span:
 ```c#
 // Create a one-time allocation object pool
-static class BitPool {
+static class BufferPool {
 	[ThreadStatic]
 	private static BitBuffer bitBuffer;
 
@@ -208,7 +208,7 @@ struct MessageObject {
 	ushort skin;
 
 	public void Serialize(ref Span<byte> packet) {
-		BitBuffer data = GetBitBuffer();
+		BitBuffer data = BufferPool.GetBitBuffer();
 
 		data.AddUInt(peer)
 		.AddByte(race)
@@ -220,7 +220,7 @@ struct MessageObject {
 	}
 
 	public void Deserialize(ref ReadOnlySpan<byte> packet, int length) {
-		BitBuffer data = GetBitBuffer();
+		BitBuffer data = BufferPool.GetBitBuffer();
 
 		data.FromSpan(ref packet, length);
 
