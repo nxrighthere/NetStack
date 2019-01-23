@@ -46,7 +46,7 @@ Usage
 --------
 ##### Thread-safe buffers pool:
 ```c#
-// Create a new buffers pool with a maximum size of 1024 bytes per array, 50 arrays per bucket
+// Create a new array pool with a maximum size of 1024 bytes per array, 50 arrays per bucket
 ArrayPool<byte> buffers = ArrayPool<byte>.Create(1024, 50);
 
 // Rent buffer from the pool with a minimum size of 64 bytes, the returned buffer might be larger
