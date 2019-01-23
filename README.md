@@ -202,7 +202,7 @@ static class BufferPool {
 
 // Define a networking message
 struct MessageObject {
-	public const id = 1; // Used to identify the message
+	public const ushort id = 1; // Used to identify the message
 	public uint peer;
 	public byte race;
 	public ushort skin;
