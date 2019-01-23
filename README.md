@@ -187,7 +187,7 @@ Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
 
 ##### Abstract data serialization with Span:
 ```c#
-// Create a one-time allocation object pool
+// Create a one-time allocation buffer pool
 static class BufferPool {
 	[ThreadStatic]
 	private static BitBuffer bitBuffer;
