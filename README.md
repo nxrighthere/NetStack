@@ -67,8 +67,8 @@ buffers.Return(buffer);
 ```c#
 // Define a message object
 class MessageObject {
-	public uint id { get; set; }
-	public byte[] data { get; set; }
+	public uint id;
+	public byte[] data;
 }
 
 // Create a new objects pool with 8 objects in the head
@@ -147,8 +147,8 @@ Quaternion rotation = SmallestThree.Decompress(compressedRotation);
 
 ##### Serialize/deserialize data:
 ```c#
-// Create a new bit buffer with 128 chunks
-BitBuffer data = new BitBuffer(128);
+// Create a new bit buffer with 1024 chunks, the buffer can grow automatically if required
+BitBuffer data = new BitBuffer(1024);
 
 // Fill bit buffer and serialize data to a byte array
 data.AddUInt(peer)
@@ -183,4 +183,53 @@ CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), data.R
 
 // Check if bit buffer is fully unloaded
 Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
+```
+
+##### Abstract data serialization with Span:
+```c#
+// Create a one-time allocation object pool which will be unique for each thread
+static class BitPool {
+	[ThreadStatic]
+	private static BitBuffer bitBuffer;
+
+	public static BitBuffer GetBitBuffer() {
+		if (bitBuffer == null)
+			bitBuffer = new BitBuffer(1024);
+
+		return bitBuffer;
+	}
+}
+
+// Define a networking message
+struct MessageObject {
+	uint peer;
+	byte race;
+	byte class;
+	ushort skin;
+
+	public void Serialize(ref Span<byte> packet) {
+		BitBuffer data = GetBitBuffer();
+
+		data.AddUInt(peer)
+		.AddByte(race)
+		.AddByte(class)
+		.AddUShort(skin)
+		.ToSpan(ref packet);
+
+		data.Clear()
+	}
+
+	public void Deserialize(ref ReadOnlySpan<byte> packet, int length) {
+		BitBuffer data = GetBitBuffer();
+
+		data.FromSpan(ref packet, length);
+
+		peer = data.ReadUInt();
+		race = data.ReadByte();
+		class = data.ReadByte();
+		skin = data.ReadUShort();
+
+		data.Clear();
+	}
+}
 ```
