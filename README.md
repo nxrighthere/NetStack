@@ -202,9 +202,10 @@ static class BufferPool {
 
 // Define a networking message
 struct MessageObject {
-	uint peer;
-	byte race;
-	ushort skin;
+	public const id = 1; // Used to identify the message
+	public uint peer;
+	public byte race;
+	public ushort skin;
 
 	public void Serialize(ref Span<byte> packet) {
 		BitBuffer data = BufferPool.GetBitBuffer();
