@@ -19,7 +19,7 @@ Modules:
 - Serialization
   - Lightweight and straightforward
   - Fast processing
-  - [Span](https://msdn.microsoft.com/en-us/magazine/mt814808.aspx) support
+  - [Span](https://adamsitnik.com/Span/) support
   - [Fluent builder](http://www.stefanoricciardi.com/2010/04/14/a-fluent-builder-in-c/) support
   - Compact bit-packing
     - [ZigZag](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers) encoding
