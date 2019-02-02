@@ -56,9 +56,9 @@ namespace NetStack.Serialization {
 		private uint[] chunks;
 
 		public BitBuffer(int capacity = defaultCapacity) {
-			chunks = new uint[capacity];
 			readPosition = 0;
 			nextPosition = 0;
+			chunks = new uint[capacity];
 		}
 
 		public int Length {
@@ -97,7 +97,6 @@ namespace NetStack.Serialization {
 
 			chunks[index] = (uint)result;
 			chunks[index + 1] = (uint)(result >> 32);
-
 			nextPosition += numBits;
 		}
 
