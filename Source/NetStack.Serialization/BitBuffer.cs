@@ -73,42 +73,6 @@ namespace NetStack.Serialization {
 			}
 		}
 
-		private void ExpandArray() {
-			int newCapacity = (chunks.Length * growFactor) + minGrow;
-			uint[] newChunks = new uint[newCapacity];
-
-			Array.Copy(chunks, newChunks, chunks.Length);
-			chunks = newChunks;
-		}
-
-		private static int FindHighestBitPosition(byte data) {
-			int shiftCount = 0;
-
-			while (data > 0) {
-				data >>= 1;
-				shiftCount++;
-			}
-
-			return shiftCount;
-		}
-
-		private static byte ToASCII(char character) {
-			byte value = 0;
-
-			try {
-				value = Convert.ToByte(character);
-			}
-
-			catch (OverflowException) {
-				throw new Exception("Cannot convert to ASCII: " + character);
-			}
-
-			if (value > 127)
-				throw new Exception("Cannot convert to ASCII: " + character);
-
-			return value;
-		}
-
 		public void Clear() {
 			readPosition = 0;
 			nextPosition = 0;
@@ -575,6 +539,42 @@ namespace NetStack.Serialization {
 			}
 
 			return spaced.ToString();
+		}
+
+		private void ExpandArray() {
+			int newCapacity = (chunks.Length * growFactor) + minGrow;
+			uint[] newChunks = new uint[newCapacity];
+
+			Array.Copy(chunks, newChunks, chunks.Length);
+			chunks = newChunks;
+		}
+
+		private static int FindHighestBitPosition(byte data) {
+			int shiftCount = 0;
+
+			while (data > 0) {
+				data >>= 1;
+				shiftCount++;
+			}
+
+			return shiftCount;
+		}
+
+		private static byte ToASCII(char character) {
+			byte value = 0;
+
+			try {
+				value = Convert.ToByte(character);
+			}
+
+			catch (OverflowException) {
+				throw new Exception("Cannot convert to ASCII: " + character);
+			}
+
+			if (value > 127)
+				throw new Exception("Cannot convert to ASCII: " + character);
+
+			return value;
 		}
 	}
 }
