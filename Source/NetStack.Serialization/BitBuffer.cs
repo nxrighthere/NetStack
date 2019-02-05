@@ -495,7 +495,7 @@ namespace NetStack.Serialization {
 
 			uint length = (uint)value.Length;
 
-			if (value.Length > stringLengthMax)
+			if (length > stringLengthMax)
 				length = (uint)stringLengthMax;
 
 			Add(stringLengthBits, length);
