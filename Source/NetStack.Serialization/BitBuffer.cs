@@ -353,7 +353,7 @@ namespace NetStack.Serialization {
 		#endif
 		public int ReadInt() {
 			uint value = ReadUInt();
-			int zagzig = (int)((value >> 1) ^ (-(value & 1)));
+			int zagzig = (int)((value >> 1) ^ (-(int)(value & 1)));
 
 			return zagzig;
 		}
@@ -363,7 +363,7 @@ namespace NetStack.Serialization {
 		#endif
 		public int PeekInt() {
 			uint value = PeekUInt();
-			int zagzig = (int)((value >> 1) ^ (-(value & 1)));
+			int zagzig = (int)((value >> 1) ^ (-(int)(value & 1)));
 
 			return zagzig;
 		}
