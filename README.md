@@ -25,6 +25,8 @@ Modules:
     - [ZigZag](https://developers.google.com/protocol-buffers/docs/encoding#signed-integers) encoding
     - [Variable-length](https://rosettacode.org/wiki/Variable-length_quantity) encoding
 - Threading
+  - Array queue
+    - Single-producer single-consumer first-in-first-out non-blocking queue
   - Concurrent objects buffer
     - Multi-producer multi-consumer first-in-first-out non-blocking queue
   - Concurrent objects pool
