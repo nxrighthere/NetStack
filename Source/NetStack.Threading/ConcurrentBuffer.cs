@@ -32,13 +32,13 @@ namespace NetStack.Threading {
 		[FieldOffset(8)]
 		private readonly int _bufferMask;
 		[FieldOffset(64)]
-		private int _enqueuePos;
+		private int _enqueuePosition;
 		[FieldOffset(128)]
-		private int _dequeuePos;
+		private int _dequeuePosition;
 
 		public int Count {
 			get {
-				return _enqueuePos - _dequeuePos;
+				return _enqueuePosition - _dequeuePosition;
 			}
 		}
 
@@ -56,8 +56,8 @@ namespace NetStack.Threading {
 				_buffer[i] = new Cell(i, null);
 			}
 
-			_enqueuePos = 0;
-			_dequeuePos = 0;
+			_enqueuePosition = 0;
+			_dequeuePosition = 0;
 		}
 
 		public void Enqueue(object item) {
@@ -72,24 +72,24 @@ namespace NetStack.Threading {
 		public bool TryEnqueue(object item) {
 			do {
 				var buffer = _buffer;
-				var pos = _enqueuePos;
-				var index = pos & _bufferMask;
+				var position = _enqueuePosition;
+				var index = position & _bufferMask;
 				var cell = buffer[index];
 
-				if (cell.Sequence == pos && Interlocked.CompareExchange(ref _enqueuePos, pos + 1, pos) == pos) {
+				if (cell.Sequence == position && Interlocked.CompareExchange(ref _enqueuePosition, position + 1, position) == position) {
 					buffer[index].Element = item;
 
 					#if NET_4_6 || NET_STANDARD_2_0
-						Volatile.Write(ref buffer[index].Sequence, pos + 1);
+						Volatile.Write(ref buffer[index].Sequence, position + 1);
 					#else
 						Thread.MemoryBarrier();
-						buffer[index].Sequence = pos + 1;
+						buffer[index].Sequence = position + 1;
 					#endif
 
 					return true;
 				}
 
-				if (cell.Sequence < pos)
+				if (cell.Sequence < position)
 					return false;
 			}
 
@@ -109,25 +109,25 @@ namespace NetStack.Threading {
 			do {
 				var buffer = _buffer;
 				var bufferMask = _bufferMask;
-				var pos = _dequeuePos;
-				var index = pos & bufferMask;
+				var position = _dequeuePosition;
+				var index = position & bufferMask;
 				var cell = buffer[index];
 
-				if (cell.Sequence == pos + 1 && Interlocked.CompareExchange(ref _dequeuePos, pos + 1, pos) == pos) {
+				if (cell.Sequence == position + 1 && Interlocked.CompareExchange(ref _dequeuePosition, position + 1, position) == position) {
 					result = cell.Element;
 					buffer[index].Element = null;
 
 					#if NET_4_6 || NET_STANDARD_2_0
-						Volatile.Write(ref buffer[index].Sequence, pos + bufferMask + 1);
+						Volatile.Write(ref buffer[index].Sequence, position + bufferMask + 1);
 					#else
 						Thread.MemoryBarrier();
-						buffer[index].Sequence = pos + bufferMask + 1;
+						buffer[index].Sequence = position + bufferMask + 1;
 					#endif
 
 					return true;
 				}
 
-				if (cell.Sequence < pos + 1) {
+				if (cell.Sequence < position + 1) {
 					result = default(object);
 
 					return false;
