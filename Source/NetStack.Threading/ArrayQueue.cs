@@ -51,11 +51,6 @@ namespace NetStack.Threading {
 
 			_arrayMask = capacity - 1;
 			_array = new Entry[capacity];
-
-			for (var i = 0; i < capacity; i++) {
-				_array[i] = new Entry();
-			}
-
 			_enqueuePosition = 0;
 			_dequeuePosition = 0;
 		}
@@ -84,7 +79,7 @@ namespace NetStack.Threading {
 				Volatile.Write(ref _enqueuePosition, position + 1);
 			#else
 				Thread.MemoryBarrier();
-				_enqueuePosition = position + bufferMask + 1;
+				_enqueuePosition = position + 1;
 			#endif
 
 			return true;
@@ -125,7 +120,7 @@ namespace NetStack.Threading {
 		}
 
 		[StructLayout(LayoutKind.Explicit, Size = 16, CharSet = CharSet.Ansi)]
-		internal struct Entry {
+		private struct Entry {
 			[FieldOffset(0)]
 			private int isSet;
 			[FieldOffset(8)]
