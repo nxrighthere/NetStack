@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (c) 2019 Stanislav Denisov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -133,11 +133,21 @@ namespace NetStack.Threading {
 
 			internal int IsSet {
 				get {
-					return Volatile.Read(ref isSet);
+					#if NET_4_6 || NET_STANDARD_2_0
+						return Volatile.Read(ref isSet);
+					#else
+						Thread.MemoryBarrier();
+						return isSet;
+					#endif
 				}
 
 				set {
-					Volatile.Write(ref isSet, value);
+					#if NET_4_6 || NET_STANDARD_2_0
+						Volatile.Write(ref isSet, value);
+					#else
+						Thread.MemoryBarrier();
+						isSet = value;
+					#endif
 				}
 			}
 		}
