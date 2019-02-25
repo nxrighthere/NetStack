@@ -27,9 +27,9 @@ Modules:
 - Threading
   - Array queue
     - Single-producer single-consumer first-in-first-out non-blocking queue
-  - Concurrent objects buffer
+  - Concurrent buffer
     - Multi-producer multi-consumer first-in-first-out non-blocking queue
-  - Concurrent objects pool
+  - Concurrent pool
     - Self-stabilizing semi-lockless circular buffer
 - Unsafe
   - Fast memory copying
