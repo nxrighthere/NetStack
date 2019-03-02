@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (c) 2018 Alexander Nikitin, Stanislav Denisov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace NetStack.Threading {
-	[StructLayout(LayoutKind.Explicit, Size = 192, CharSet = CharSet.Ansi)]
+	[StructLayout(LayoutKind.Explicit, Size = 192)]
 	public sealed class ConcurrentBuffer {
 		[FieldOffset(0)]
 		private readonly Cell[] _buffer;
@@ -137,7 +137,7 @@ namespace NetStack.Threading {
 			while (true);
 		}
 
-		[StructLayout(LayoutKind.Explicit, Size = 16, CharSet = CharSet.Ansi)]
+		[StructLayout(LayoutKind.Explicit, Size = 16)]
 		private struct Cell {
 			[FieldOffset(0)]
 			public int Sequence;

@@ -1,4 +1,4 @@
-/*
+﻿/*
  *  Copyright (c) 2019 Stanislav Denisov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace NetStack.Threading {
-	[StructLayout(LayoutKind.Explicit, Size = 192, CharSet = CharSet.Ansi)]
+	[StructLayout(LayoutKind.Explicit, Size = 192)]
 	public sealed class ArrayQueue {
 		[FieldOffset(0)]
 		private readonly Entry[] _array;
@@ -119,7 +119,7 @@ namespace NetStack.Threading {
 			return true;
 		}
 
-		[StructLayout(LayoutKind.Explicit, Size = 16, CharSet = CharSet.Ansi)]
+		[StructLayout(LayoutKind.Explicit, Size = 16)]
 		private struct Entry {
 			[FieldOffset(0)]
 			private int isSet;
