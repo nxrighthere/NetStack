@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  Copyright (c) 2018 Stanislav Denisov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -73,11 +73,17 @@ namespace NetStack.Serialization {
 			}
 		}
 
+		#if NETSTACK_INLINING
+			[MethodImpl(256)]
+		#endif
 		public void Clear() {
 			readPosition = 0;
 			nextPosition = 0;
 		}
 
+		#if NETSTACK_INLINING
+			[MethodImpl(256)]
+		#endif
 		public void Add(int numBits, uint value) {
 			if (numBits < 0)
 				throw new ArgumentOutOfRangeException("Pushing negative bits");
@@ -100,6 +106,9 @@ namespace NetStack.Serialization {
 			nextPosition += numBits;
 		}
 
+		#if NETSTACK_INLINING
+			[MethodImpl(256)]
+		#endif
 		public uint Read(int numBits) {
 			uint result = Peek(numBits);
 
@@ -108,6 +117,9 @@ namespace NetStack.Serialization {
 			return result;
 		}
 
+		#if NETSTACK_INLINING
+			[MethodImpl(256)]
+		#endif
 		public uint Peek(int numBits) {
 			if (numBits < 0)
 				throw new ArgumentOutOfRangeException("Pushing negative bits");
