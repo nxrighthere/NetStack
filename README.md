@@ -36,7 +36,7 @@ Modules:
 - Unsafe
   - Fast memory copying
 
-NetStack utilized in various prototypes ([1](https://vimeo.com/292969981), [2](https://forum.unity.com/threads/showcase-enet-unity-ecs-5000-real-time-player-simulation.605656/)) of the high-performance networking systems.
+NetStack utilized in various prototypes ([1](https://vimeo.com/292969981), [2](https://forum.unity.com/threads/showcase-enet-unity-ecs-5000-real-time-player-simulation.605656/), [3](https://github.com/RomanZhu/Entitas-Sync-Framework)) of the high-performance networking systems.
 
 Building
 --------
