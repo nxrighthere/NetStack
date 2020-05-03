@@ -129,10 +129,10 @@ worldBounds[0] = new BoundedRange(-50f, 50f, 0.05f); // X axis
 worldBounds[1] = new BoundedRange(0f, 25f, 0.05f); // Y axis
 worldBounds[2] = new BoundedRange(-50f, 50f, 0.05f); // Z axis
 
-// Compress position data, ready for compact bit-packing 
+// Compress position data ready for compact bit-packing 
 CompressedVector3 compressedPosition = BoundedRange.Compress(position, worldBounds);
 
-// Read compressed data, ready for reconstruction after bit-packing
+// Read compressed data ready for reconstruction after bit-packing
 Console.WriteLine("Compressed position - X: " + compressedPosition.x + ", Y:" + compressedPosition.y + ", Z:" + compressedPosition.z);
 
 // Decompress position data
