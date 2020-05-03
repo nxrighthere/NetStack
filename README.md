@@ -136,7 +136,7 @@ CompressedVector3 compressedPosition = BoundedRange.Compress(position, worldBoun
 // Read compressed data
 Console.WriteLine("Compressed position - X: " + compressedPosition.x + ", Y:" + compressedPosition.y + ", Z:" + compressedPosition.z);
 
-// Decompress position data ready for reconstruction from bit-packing
+// Decompress position data ready for reconstruction after bit-packing
 Vector3 decompressedPosition = BoundedRange.Decompress(compressedPosition, worldBounds);
 ```
 
