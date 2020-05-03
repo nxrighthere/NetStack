@@ -125,6 +125,7 @@ float speed = HalfPrecision.Decompress(compressedSpeed);
 // Create a new BoundedRange array for Vector3 position, each entry has bounds and precision
 BoundedRange[] worldBounds = new BoundedRange[3];
 
+// Position data quantization
 worldBounds[0] = new BoundedRange(-50f, 50f, 0.05f); // X axis
 worldBounds[1] = new BoundedRange(0f, 25f, 0.05f); // Y axis
 worldBounds[2] = new BoundedRange(-50f, 50f, 0.05f); // Z axis
@@ -132,10 +133,10 @@ worldBounds[2] = new BoundedRange(-50f, 50f, 0.05f); // Z axis
 // Compress position data ready for compact bit-packing 
 CompressedVector3 compressedPosition = BoundedRange.Compress(position, worldBounds);
 
-// Read compressed data ready for reconstruction from bit-packing
+// Read compressed data
 Console.WriteLine("Compressed position - X: " + compressedPosition.x + ", Y:" + compressedPosition.y + ", Z:" + compressedPosition.z);
 
-// Decompress position data
+// Decompress position data ready for reconstruction from bit-packing
 Vector3 decompressedPosition = BoundedRange.Decompress(compressedPosition, worldBounds);
 ```
 
