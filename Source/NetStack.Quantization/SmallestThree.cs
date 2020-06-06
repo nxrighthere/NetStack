@@ -45,7 +45,7 @@ namespace NetStack.Quantization {
 
 	public static class SmallestThree {
 		private const float smallestThreeUnpack = 0.70710678118654752440084436210485f + 0.0000001f;
-		private const float smallestThreePack = 1f / smallestThreeUnpack;
+		private const float smallestThreePack = 1.0f / smallestThreeUnpack;
 
 		public static QuantizedQuaternion Quantize(Quaternion quaternion, int bitsPerElement = 12) {
 			float halfRange = (1 << bitsPerElement - 1);
@@ -189,7 +189,7 @@ namespace NetStack.Quantization {
 
 		public static Quaternion Dequantize(QuantizedQuaternion data, int bitsPerElement = 12) {
    			int halfRange = (1 << bitsPerElement - 1);
-			float unpacker = smallestThreeUnpack * (1f / halfRange);
+			float unpacker = smallestThreeUnpack * (1.0f / halfRange);
 			uint m = data.m;
 			int ai = (int)data.a;
 			int bi = (int)data.b;
@@ -203,7 +203,7 @@ namespace NetStack.Quantization {
 			float b = bi * unpacker;
 			float c = ci * unpacker;
 
-			float d = (float)Math.Sqrt(1f - ((a * a) + (b * b) + (c * c)));
+			float d = (float)Math.Sqrt(1.0f - ((a * a) + (b * b) + (c * c)));
 
 			switch (m) {
 				case 0:
