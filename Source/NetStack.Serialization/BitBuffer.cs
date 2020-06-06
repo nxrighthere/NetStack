@@ -45,9 +45,9 @@ using System.Text;
 
 namespace NetStack.Serialization {
 	public class BitBuffer {
-		private const int defaultCapacity = 8;
-		private const int stringLengthMax = 512;
-		private const int stringLengthBits = 9;
+		private const int defaultCapacity = 375; // 375 * 4 = 1500 bytes
+		private const int stringLengthBits = 8;
+		private const int stringLengthMax = (1 << stringLengthBits) - 1; //255
 		private const int bitsASCII = 7;
 		private const int growFactor = 2;
 		private const int minGrow = 1;
@@ -507,8 +507,11 @@ namespace NetStack.Serialization {
 
 			uint length = (uint)value.Length;
 
-			if (length > stringLengthMax)
+			if (length > stringLengthMax) {
 				length = (uint)stringLengthMax;
+
+				throw new ArgumentOutOfRangeException("value length exceeded");
+			}
 
 			Add(stringLengthBits, length);
 
