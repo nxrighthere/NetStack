@@ -114,9 +114,9 @@ namespace NetStack.Quantization {
 				}
 			}
 
-			float af;
-			float bf;
-			float cf;
+			float af = 0.0f;
+			float bf = 0.0f;
+			float cf = 0.0f;
 
 			#if ENABLE_MONO || ENABLE_IL2CPP
 				switch (m) {
