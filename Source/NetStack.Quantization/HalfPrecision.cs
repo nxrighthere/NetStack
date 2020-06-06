@@ -23,7 +23,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace NetStack.Compression {
+namespace NetStack.Quantization {
 	public static class HalfPrecision {
 		[StructLayout(LayoutKind.Explicit)]
 		private struct Values {
@@ -38,15 +38,15 @@ namespace NetStack.Compression {
 		#if NETSTACK_INLINING
 			[MethodImpl(256)]
 		#endif
-		public static ushort Compress(float value) {
+		public static ushort Quantize(float value) {
 			var values = new Values {
 				f = value
 			};
 
-			return Compress(values.i);
+			return Quantize(values.i);
 		}
 
-		public static ushort Compress(int value) {
+		public static ushort Quantize(int value) {
 			int s = (value >> 16) & 0x00008000;
 			int e = ((value >> 23) & 0X000000FF) - (127 - 15);
 			int m = value & 0X007FFFFF;
@@ -88,7 +88,7 @@ namespace NetStack.Compression {
 			return (ushort)(s | (e << 10) | (m >> 13));
 		}
 
-		public static float Decompress(ushort value) {
+		public static float Dequantize(ushort value) {
 			uint result;
 			uint mantissa = (uint)(value & 1023);
 			uint exponent = 0XFFFFFFF2;

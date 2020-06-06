@@ -29,36 +29,36 @@ using System.Runtime.CompilerServices;
 	using UnityEngine;
 #endif
 
-namespace NetStack.Compression {
-	public struct CompressedVector2 {
+namespace NetStack.Quantization {
+	public struct QuantizedVector2 {
 		public uint x;
 		public uint y;
 
-		public CompressedVector2(uint x, uint y) {
+		public QuantizedVector2(uint x, uint y) {
 			this.x = x;
 			this.y = y;
 		}
 	}
 
-	public struct CompressedVector3 {
+	public struct QuantizedVector3 {
 		public uint x;
 		public uint y;
 		public uint z;
 
-		public CompressedVector3(uint x, uint y, uint z) {
+		public QuantizedVector3(uint x, uint y, uint z) {
 			this.x = x;
 			this.y = y;
 			this.z = z;
 		}
 	}
 
-	public struct CompressedVector4 {
+	public struct QuantizedVector4 {
 		public uint x;
 		public uint y;
 		public uint z;
 		public uint w;
 
-		public CompressedVector4(uint x, uint y, uint z, uint w) {
+		public QuantizedVector4(uint x, uint y, uint z, uint w) {
 			this.x = x;
 			this.y = y;
 			this.z = z;
@@ -102,7 +102,7 @@ namespace NetStack.Compression {
 		#if NETSTACK_INLINING
 			[MethodImpl(256)]
 		#endif
-		public uint Compress(float value) {
+		public uint Quantize(float value) {
 			if (value < minValue)
 				value = minValue;
 			else if (value > maxValue)
@@ -114,7 +114,7 @@ namespace NetStack.Compression {
 		#if NETSTACK_INLINING
 			[MethodImpl(256)]
 		#endif
-		public float Decompress(uint data) {
+		public float Dequantize(uint data) {
 			float adjusted = ((float)data * precision) + minValue;
 
 			if (adjusted < minValue)
@@ -125,64 +125,64 @@ namespace NetStack.Compression {
 			return adjusted;
 		}
 
-		public static CompressedVector2 Compress(Vector2 vector2, BoundedRange[] boundedRange) {
-			CompressedVector2 data = default(CompressedVector2);
+		public static QuantizedVector2 Quantize(Vector2 vector2, BoundedRange[] boundedRange) {
+			QuantizedVector2 data = default(QuantizedVector2);
 
 			#if ENABLE_MONO || ENABLE_IL2CPP
-				data.x = boundedRange[0].Compress(vector2.x);
-				data.y = boundedRange[1].Compress(vector2.y);
+				data.x = boundedRange[0].Quantize(vector2.x);
+				data.y = boundedRange[1].Quantize(vector2.y);
 			#else
-				data.x = boundedRange[0].Compress(vector2.X);
-				data.y = boundedRange[1].Compress(vector2.Y);
+				data.x = boundedRange[0].Quantize(vector2.X);
+				data.y = boundedRange[1].Quantize(vector2.Y);
 			#endif
 
 			return data;
 		}
 
-		public static CompressedVector3 Compress(Vector3 vector3, BoundedRange[] boundedRange) {
-			CompressedVector3 data = default(CompressedVector3);
+		public static QuantizedVector3 Quantize(Vector3 vector3, BoundedRange[] boundedRange) {
+			QuantizedVector3 data = default(QuantizedVector3);
 
 			#if ENABLE_MONO || ENABLE_IL2CPP
-				data.x = boundedRange[0].Compress(vector3.x);
-				data.y = boundedRange[1].Compress(vector3.y);
-				data.z = boundedRange[2].Compress(vector3.z);
+				data.x = boundedRange[0].Quantize(vector3.x);
+				data.y = boundedRange[1].Quantize(vector3.y);
+				data.z = boundedRange[2].Quantize(vector3.z);
 			#else
-				data.x = boundedRange[0].Compress(vector3.X);
-				data.y = boundedRange[1].Compress(vector3.Y);
-				data.z = boundedRange[2].Compress(vector3.Z);
+				data.x = boundedRange[0].Quantize(vector3.X);
+				data.y = boundedRange[1].Quantize(vector3.Y);
+				data.z = boundedRange[2].Quantize(vector3.Z);
 			#endif
 
 			return data;
 		}
 
-		public static CompressedVector4 Compress(Vector4 vector4, BoundedRange[] boundedRange) {
-			CompressedVector4 data = default(CompressedVector4);
+		public static QuantizedVector4 Quantize(Vector4 vector4, BoundedRange[] boundedRange) {
+			QuantizedVector4 data = default(QuantizedVector4);
 
 			#if ENABLE_MONO || ENABLE_IL2CPP
-				data.x = boundedRange[0].Compress(vector4.x);
-				data.y = boundedRange[1].Compress(vector4.y);
-				data.z = boundedRange[2].Compress(vector4.z);
-				data.w = boundedRange[3].Compress(vector4.w);
+				data.x = boundedRange[0].Quantize(vector4.x);
+				data.y = boundedRange[1].Quantize(vector4.y);
+				data.z = boundedRange[2].Quantize(vector4.z);
+				data.w = boundedRange[3].Quantize(vector4.w);
 			#else
-				data.x = boundedRange[0].Compress(vector4.X);
-				data.y = boundedRange[1].Compress(vector4.Y);
-				data.z = boundedRange[2].Compress(vector4.Z);
-				data.w = boundedRange[3].Compress(vector4.W);
+				data.x = boundedRange[0].Quantize(vector4.X);
+				data.y = boundedRange[1].Quantize(vector4.Y);
+				data.z = boundedRange[2].Quantize(vector4.Z);
+				data.w = boundedRange[3].Quantize(vector4.W);
 			#endif
 
 			return data;
 		}
 
-		public static Vector2 Decompress(CompressedVector2 data, BoundedRange[] boundedRange) {
-			return new Vector2(boundedRange[0].Decompress(data.x), boundedRange[1].Decompress(data.y));
+		public static Vector2 Dequantize(QuantizedVector2 data, BoundedRange[] boundedRange) {
+			return new Vector2(boundedRange[0].Dequantize(data.x), boundedRange[1].Dequantize(data.y));
 		}
 
-		public static Vector3 Decompress(CompressedVector3 data, BoundedRange[] boundedRange) {
-			return new Vector3(boundedRange[0].Decompress(data.x), boundedRange[1].Decompress(data.y), boundedRange[2].Decompress(data.z));
+		public static Vector3 Dequantize(QuantizedVector3 data, BoundedRange[] boundedRange) {
+			return new Vector3(boundedRange[0].Dequantize(data.x), boundedRange[1].Dequantize(data.y), boundedRange[2].Dequantize(data.z));
 		}
 
-		public static Vector4 Decompress(CompressedVector4 data, BoundedRange[] boundedRange) {
-			return new Vector4(boundedRange[0].Decompress(data.x), boundedRange[1].Decompress(data.y), boundedRange[2].Decompress(data.z), boundedRange[3].Decompress(data.w));
+		public static Vector4 Dequantize(QuantizedVector4 data, BoundedRange[] boundedRange) {
+			return new Vector4(boundedRange[0].Dequantize(data.x), boundedRange[1].Dequantize(data.y), boundedRange[2].Dequantize(data.z), boundedRange[3].Dequantize(data.w));
 		}
 	}
 }

@@ -14,7 +14,7 @@ Modules:
 
 - Buffers
   - Thread-safe [array pool](https://adamsitnik.com/Array-Pool/)
-- Compression
+- Quatization
   - [Half precision](https://en.wikipedia.org/wiki/Half-precision_floating-point_format) algorithm
   - [Bounded range](https://gafferongames.com/post/snapshot_compression/#optimizing-position) algorithm
   - [Smallest three](https://gafferongames.com/post/snapshot_compression/#optimizing-orientation) algorithm
@@ -111,16 +111,14 @@ conveyor.Enqueue(message);
 MessageObject message = (MessageObject)conveyor.Dequeue();
 ```
 
-##### Compress float:
+##### Quantize float:
 ```c#
-// Compress data
-ushort compressedSpeed = HalfPrecision.Compress(speed);
+ushort quantizedSpeed = HalfPrecision.Quantize(speed);
 
-// Decompress data
-float speed = HalfPrecision.Decompress(compressedSpeed);
+float speed = HalfPrecision.Dequantize(quantizedSpeed);
 ```
 
-##### Compress vector:
+##### Quantize vector:
 ```c#
 // Create a new BoundedRange array for Vector3 position, each entry has bounds and precision
 BoundedRange[] worldBounds = new BoundedRange[3];
@@ -130,26 +128,26 @@ worldBounds[0] = new BoundedRange(-50f, 50f, 0.05f); // X axis
 worldBounds[1] = new BoundedRange(0f, 25f, 0.05f); // Y axis
 worldBounds[2] = new BoundedRange(-50f, 50f, 0.05f); // Z axis
 
-// Compress position data ready for compact bit-packing 
-CompressedVector3 compressedPosition = BoundedRange.Compress(position, worldBounds);
+// Quantize position data ready for compact bit-packing 
+QuantizedVector3 quantizedPosition = BoundedRange.Quantize(position, worldBounds);
 
-// Read compressed data
-Console.WriteLine("Compressed position - X: " + compressedPosition.x + ", Y:" + compressedPosition.y + ", Z:" + compressedPosition.z);
+// Read quantized data
+Console.WriteLine("Quantized position - X: " + quantizedPosition.x + ", Y:" + quantizedPosition.y + ", Z:" + quantizedPosition.z);
 
-// Decompress position data ready for reconstruction after bit-packing
-Vector3 decompressedPosition = BoundedRange.Decompress(compressedPosition, worldBounds);
+// Dequantize position data ready for reconstruction after bit-packing
+Vector3 dequantizedPosition = BoundedRange.Dequantize(quantizedPosition, worldBounds);
 ```
 
-##### Compress quaternion:
+##### Quantize quaternion:
 ```c#
-// Compress rotation data
-CompressedQuaternion compressedRotation = SmallestThree.Compress(rotation);
+// Quantize rotation data
+QuantizedQuaternion quantizedRotation = SmallestThree.Quantize(rotation);
 
-// Read compressed data
-Console.WriteLine("Compressed rotation - M: " + compressedRotation.m + ", A:" + compressedRotation.a + ", B:" + compressedRotation.b + ", C:" + compressedRotation.c);
+// Read quantized data
+Console.WriteLine("Quantized rotation - M: " + quantizedRotation.m + ", A:" + quantizedRotation.a + ", B:" + quantizedRotation.b + ", C:" + quantizedRotation.c);
 
-// Decompress rotation data
-Quaternion rotation = SmallestThree.Decompress(compressedRotation);
+// Dequantize rotation data
+Quaternion rotation = SmallestThree.Dequantize(quantizedRotation);
 ```
 
 ##### Serialize/deserialize data:
@@ -162,13 +160,13 @@ data.AddUInt(peer)
 .AddString(name)
 .AddBool(accelerated)
 .AddUShort(speed)
-.AddUInt(compressedPosition.x)
-.AddUInt(compressedPosition.y)
-.AddUInt(compressedPosition.z)
-.AddByte(compressedRotation.m)
-.AddShort(compressedRotation.a)
-.AddShort(compressedRotation.b)
-.AddShort(compressedRotation.c)
+.AddUInt(quantizedPosition.x)
+.AddUInt(quantizedPosition.y)
+.AddUInt(quantizedPosition.z)
+.AddByte(quantizedRotation.m)
+.AddShort(quantizedRotation.a)
+.AddShort(quantizedRotation.b)
+.AddShort(quantizedRotation.c)
 .ToArray(buffer);
 
 // Get a length of actual data in bit buffer for sending through the network
@@ -185,8 +183,8 @@ uint peer = data.ReadUInt();
 string name = data.ReadString();
 bool accelerated = data.ReadBool();
 ushort speed = data.ReadUShort();
-CompressedVector3 position = new CompressedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
-CompressedQuaternion rotation = new CompressedQuaternion(data.ReadByte(), data.ReadShort(), data.ReadShort(), data.ReadShort());
+QuantizedVector3 position = new QuantizedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
+QuantizedQuaternion rotation = new QuantizedQuaternion(data.ReadByte(), data.ReadShort(), data.ReadShort(), data.ReadShort());
 
 // Check if bit buffer is fully unloaded
 Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
