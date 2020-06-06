@@ -34,8 +34,6 @@ Modules:
 - Unsafe
   - Fast memory copying
 
-NetStack utilized in various prototypes ([1](https://vimeo.com/292969981), [2](https://forum.unity.com/threads/showcase-enet-unity-ecs-5000-real-time-player-simulation.605656/), [3](https://github.com/RomanZhu/Entitas-Sync-Framework)) of the high-performance networking systems.
-
 Building
 --------
 By default, all scripts are compiled for .NET Framework 3.5. Define `NET_4_6` directive to build the assembly for .NET Framework 4.6 or higher. Define `NET_STANDARD_2_0` to build the assembly for .NET Core 2.1 or higher.
