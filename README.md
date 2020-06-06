@@ -140,13 +140,13 @@ Vector3 dequantizedPosition = BoundedRange.Dequantize(quantizedPosition, worldBo
 
 ##### Quantize quaternion:
 ```c#
-// Quantize rotation data
+// Quantize rotation data ready for compact bit-packing 
 QuantizedQuaternion quantizedRotation = SmallestThree.Quantize(rotation);
 
 // Read quantized data
 Console.WriteLine("Quantized rotation - M: " + quantizedRotation.m + ", A:" + quantizedRotation.a + ", B:" + quantizedRotation.b + ", C:" + quantizedRotation.c);
 
-// Dequantize rotation data
+// Dequantize rotation data ready for reconstruction after bit-packing
 Quaternion rotation = SmallestThree.Dequantize(quantizedRotation);
 ```
 
