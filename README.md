@@ -14,7 +14,7 @@ Modules:
 
 - Buffers
   - Thread-safe [array pool](https://adamsitnik.com/Array-Pool/)
-- Quatization
+- Quantization
   - [Half precision](https://en.wikipedia.org/wiki/Half-precision_floating-point_format) algorithm
   - [Bounded range](https://gafferongames.com/post/snapshot_compression/#optimizing-position) algorithm
   - [Smallest three](https://gafferongames.com/post/snapshot_compression/#optimizing-orientation) algorithm
