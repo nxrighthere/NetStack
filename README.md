@@ -4,8 +4,6 @@
 
 [![PayPal](https://github.com/Rageware/Shields/blob/master/paypal.svg)](https://www.paypal.me/nxrighthere) [![Bountysource](https://github.com/Rageware/Shields/blob/master/bountysource.svg)](https://salt.bountysource.com/checkout/amount?team=nxrighthere) [![Coinbase](https://github.com/Rageware/Shields/blob/master/coinbase.svg)](https://commerce.coinbase.com/checkout/03e11816-b6fc-4e14-b974-29a1d0886697)
 
-_The library is no longer in active public development, all futher work moved to private, this repository turned into read-only mode for historical reference. Thanks to all supporters and contributors._
-
 Lightweight toolset for creating concurrent networking systems for multiplayer games.
 
 NetStack is self-contained and has no dependencies.
