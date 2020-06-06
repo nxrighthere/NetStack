@@ -163,10 +163,10 @@ data.AddUInt(peer)
 .AddUInt(quantizedPosition.x)
 .AddUInt(quantizedPosition.y)
 .AddUInt(quantizedPosition.z)
-.AddByte(quantizedRotation.m)
-.AddShort(quantizedRotation.a)
-.AddShort(quantizedRotation.b)
-.AddShort(quantizedRotation.c)
+.AddUInt(quantizedRotation.m)
+.AddUInt(quantizedRotation.a)
+.AddUInt(quantizedRotation.b)
+.AddUInt(quantizedRotation.c)
 .ToArray(buffer);
 
 // Get a length of actual data in bit buffer for sending through the network
@@ -184,7 +184,7 @@ string name = data.ReadString();
 bool accelerated = data.ReadBool();
 ushort speed = data.ReadUShort();
 QuantizedVector3 position = new QuantizedVector3(data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
-QuantizedQuaternion rotation = new QuantizedQuaternion(data.ReadByte(), data.ReadShort(), data.ReadShort(), data.ReadShort());
+QuantizedQuaternion rotation = new QuantizedQuaternion(data.ReadUInt(), data.ReadUInt(), data.ReadUInt(), data.ReadUInt());
 
 // Check if bit buffer is fully unloaded
 Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
