@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2018 Stanislav Denisov
+ *  Copyright (c) 2020 Stanislav Denisov, Maxim Munning, Davin Carten
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
