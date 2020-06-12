@@ -73,17 +73,13 @@ namespace NetStack.Serialization {
 			}
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public void Clear() {
 			readPosition = 0;
 			nextPosition = 0;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public void Add(int numBits, uint value) {
 			if (numBits < 0)
 				throw new ArgumentOutOfRangeException("Pushing negative bits");
@@ -106,9 +102,7 @@ namespace NetStack.Serialization {
 			nextPosition += numBits;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public uint Read(int numBits) {
 			uint result = Peek(numBits);
 
@@ -117,9 +111,7 @@ namespace NetStack.Serialization {
 			return result;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public uint Peek(int numBits) {
 			if (numBits < 0)
 				throw new ArgumentOutOfRangeException("Pushing negative bits");
@@ -257,101 +249,75 @@ namespace NetStack.Serialization {
 			}
 		#endif
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddBool(bool value) {
 			Add(1, value ? 1U : 0U);
 
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public bool ReadBool() {
 			return Read(1) > 0;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public bool PeekBool() {
 			return Peek(1) > 0;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddByte(byte value) {
 			Add(8, value);
 
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public byte ReadByte() {
 			return (byte)Read(8);
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public byte PeekByte() {
 			return (byte)Peek(8);
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddShort(short value) {
 			AddInt(value);
 
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public short ReadShort() {
 			return (short)ReadInt();
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public short PeekShort() {
 			return (short)PeekInt();
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddUShort(ushort value) {
 			AddUInt(value);
 
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public ushort ReadUShort() {
 			return (ushort)ReadUInt();
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public ushort PeekUShort() {
 			return (ushort)PeekUInt();
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddInt(int value) {
 			uint zigzag = (uint)((value << 1) ^ (value >> 31));
 
@@ -360,9 +326,7 @@ namespace NetStack.Serialization {
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public int ReadInt() {
 			uint value = ReadUInt();
 			int zagzig = (int)((value >> 1) ^ (-(int)(value & 1)));
@@ -370,9 +334,7 @@ namespace NetStack.Serialization {
 			return zagzig;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public int PeekInt() {
 			uint value = PeekUInt();
 			int zagzig = (int)((value >> 1) ^ (-(int)(value & 1)));
@@ -380,9 +342,7 @@ namespace NetStack.Serialization {
 			return zagzig;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddUInt(uint value) {
 			uint buffer = 0x0u;
 
@@ -401,9 +361,7 @@ namespace NetStack.Serialization {
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public uint ReadUInt() {
 			uint buffer = 0x0u;
 			uint value = 0x0u;
@@ -421,9 +379,7 @@ namespace NetStack.Serialization {
 			return value;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public uint PeekUInt() {
 			int tempPosition = readPosition;
 			uint value = ReadUInt();
@@ -433,9 +389,7 @@ namespace NetStack.Serialization {
 			return value;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddLong(long value) {
 			AddInt((int)(value & uint.MaxValue));
 			AddInt((int)(value >> 32));
@@ -443,9 +397,7 @@ namespace NetStack.Serialization {
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public long ReadLong() {
 			int low = ReadInt();
 			int high = ReadInt();
@@ -454,9 +406,7 @@ namespace NetStack.Serialization {
 			return value << 32 | (uint)low;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public long PeekLong() {
 			int tempPosition = readPosition;
 			long value = ReadLong();
@@ -466,9 +416,7 @@ namespace NetStack.Serialization {
 			return value;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddULong(ulong value) {
 			AddUInt((uint)(value & uint.MaxValue));
 			AddUInt((uint)(value >> 32));
@@ -476,9 +424,7 @@ namespace NetStack.Serialization {
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public ulong ReadULong() {
 			uint low = ReadUInt();
 			uint high = ReadUInt();
@@ -486,9 +432,7 @@ namespace NetStack.Serialization {
 			return (ulong)high << 32 | low;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public ulong PeekULong() {
 			int tempPosition = readPosition;
 			ulong value = ReadULong();
@@ -498,9 +442,7 @@ namespace NetStack.Serialization {
 			return value;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public BitBuffer AddString(string value) {
 			if (value == null)
 				throw new ArgumentNullException("value");
@@ -522,9 +464,7 @@ namespace NetStack.Serialization {
 			return this;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public string ReadString() {
 			StringBuilder builder = new StringBuilder();
 			uint length = Read(stringLengthBits);

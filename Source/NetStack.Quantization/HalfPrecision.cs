@@ -35,9 +35,7 @@ namespace NetStack.Quantization {
 			public uint u;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public static ushort Quantize(float value) {
 			var values = new Values {
 				f = value

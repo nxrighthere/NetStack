@@ -99,9 +99,7 @@ namespace NetStack.Quantization {
 			return DeBruijn.Lookup[(value * 0x07C4ACDDU) >> 27];
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public uint Quantize(float value) {
 			if (value < minValue)
 				value = minValue;
@@ -111,9 +109,7 @@ namespace NetStack.Quantization {
 			return (uint)((float)((value - minValue) * (1f / precision)) + 0.5f) & mask;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		public float Dequantize(uint data) {
 			float adjusted = ((float)data * precision) + minValue;
 

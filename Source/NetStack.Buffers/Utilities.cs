@@ -29,9 +29,7 @@ using System.Runtime.CompilerServices;
 
 namespace NetStack.Buffers {
 	internal static class Utilities {
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		internal static int SelectBucketIndex(int bufferSize) {
 			#if ENABLE_MONO || ENABLE_IL2CPP
 				Assert.IsTrue(bufferSize > 0);
@@ -70,9 +68,7 @@ namespace NetStack.Buffers {
 			return poolIndex + (int)bitsRemaining;
 		}
 
-		#if NETSTACK_INLINING
-			[MethodImpl(256)]
-		#endif
+		[MethodImpl(256)]
 		internal static int GetMaxSizeForBucket(int binIndex) {
 			int maxSize = 16 << binIndex;
 

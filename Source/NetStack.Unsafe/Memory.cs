@@ -26,9 +26,7 @@ using System.Runtime.CompilerServices;
 namespace NetStack.Unsafe {
 	#if NET_4_6 || NET_STANDARD_2_0
 		public static class Memory {
-			#if NETSTACK_INLINING
-				[MethodImpl(256)]
-			#endif
+			[MethodImpl(256)]
 			public static unsafe void Copy(IntPtr source, int sourceOffset, byte[] destination, int destinationOffset, int length) {
 				if (length > 0) {
 					fixed (byte* destinationPointer = &destination[destinationOffset]) {
@@ -39,9 +37,7 @@ namespace NetStack.Unsafe {
 				}
 			}
 
-			#if NETSTACK_INLINING
-				[MethodImpl(256)]
-			#endif
+			[MethodImpl(256)]
 			public static unsafe void Copy(byte[] source, int sourceOffset, IntPtr destination, int destinationOffset, int length) {
 				if (length > 0) {
 					fixed (byte* sourcePointer = &source[sourceOffset]) {
@@ -52,9 +48,7 @@ namespace NetStack.Unsafe {
 				}
 			}
 
-			#if NETSTACK_INLINING
-				[MethodImpl(256)]
-			#endif
+			[MethodImpl(256)]
 			public static unsafe void Copy(byte[] source, int sourceOffset, byte[] destination, int destinationOffset, int length) {
 				if (length > 0) {
 					fixed (byte* sourcePointer = &source[sourceOffset]) {

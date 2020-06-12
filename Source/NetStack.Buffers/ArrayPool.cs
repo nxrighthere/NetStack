@@ -33,16 +33,12 @@ namespace NetStack.Buffers {
 
 		public static ArrayPool<T> Shared {
 			#if NET_4_6 || NET_STANDARD_2_0
-				#if NETSTACK_INLINING
-					[MethodImpl(256)]
-				#endif
+				[MethodImpl(256)]
 				get {
 					return Volatile.Read(ref s_sharedInstance) ?? EnsureSharedCreated();
 				}
 			#else
-				#if NETSTACK_INLINING
-					[MethodImpl(256)]
-				#endif
+				[MethodImpl(256)]
 				get {
 					return s_sharedInstance ?? EnsureSharedCreated();
 				}
