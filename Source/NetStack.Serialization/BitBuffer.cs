@@ -47,7 +47,7 @@ namespace NetStack.Serialization {
 	public class BitBuffer {
 		private const int defaultCapacity = 375; // 375 * 4 = 1500 bytes
 		private const int stringLengthBits = 8;
-		private const int stringLengthMax = (1 << stringLengthBits) - 1; //255
+		private const int stringLengthMax = (1 << stringLengthBits) - 1; // 255
 		private const int bitsASCII = 7;
 		private const int growFactor = 2;
 		private const int minGrow = 1;
