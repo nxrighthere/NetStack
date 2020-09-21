@@ -29,7 +29,7 @@
  *  Permission is granted to anyone to use this software for any purpose,
  *  including commercial applications, and to alter it and redistribute it
  *  freely, subject to the following restrictions:
- *  
+ *
  *  1. The origin of this software must not be misrepresented; you must not
  *     claim that you wrote the original software. If you use this software
  *     in a product, an acknowledgment in the product documentation would be
@@ -40,6 +40,7 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -81,11 +82,13 @@ namespace NetStack.Serialization {
 
 		[MethodImpl(256)]
 		public void Add(int numBits, uint value) {
-			if (numBits < 0)
-				throw new ArgumentOutOfRangeException("Pushing negative bits");
-
-			if (numBits > 32)
-				throw new ArgumentOutOfRangeException("Pushing too many bits");
+			#if ENABLE_MONO || ENABLE_IL2CPP
+				Assert.IsFalse(numBits < 0); // Pushing negative bits
+				Assert.IsFalse(numBits > 32); // Pushing too many bits
+			#else
+				Debug.Assert(!(numBits < 0));
+				Debug.Assert(!(numBits > 32));
+			#endif
 
 			int index = nextPosition >> 5;
 			int used = nextPosition & 0x0000001F;
@@ -113,11 +116,13 @@ namespace NetStack.Serialization {
 
 		[MethodImpl(256)]
 		public uint Peek(int numBits) {
-			if (numBits < 0)
-				throw new ArgumentOutOfRangeException("Pushing negative bits");
-
-			if (numBits > 32)
-				throw new ArgumentOutOfRangeException("Pushing too many bits");
+			#if ENABLE_MONO || ENABLE_IL2CPP
+				Assert.IsFalse(numBits < 0); // Pushing negative bits
+				Assert.IsFalse(numBits > 32); // Pushing too many bits
+			#else
+				Debug.Assert(!(numBits < 0));
+				Debug.Assert(!(numBits > 32));
+			#endif
 
 			int index = readPosition >> 5;
 			int used = readPosition & 0x0000001F;
@@ -503,6 +508,7 @@ namespace NetStack.Serialization {
 			chunks = newChunks;
 		}
 
+		[MethodImpl(256)]
 		private static int FindHighestBitPosition(byte data) {
 			int shiftCount = 0;
 
