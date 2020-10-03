@@ -183,6 +183,22 @@ QuantizedQuaternion rotation = new QuantizedQuaternion(data.ReadUInt(), data.Rea
 Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
 ```
 
+#### Bit-level operations
+```c#
+/*
+Bits   Min Dec    Max Dec     Max Hex     Bytes Used
+0-7    0          127         0x0000007F  1 byte
+8-14   128        1023        0x00003FFF  2 bytes
+15-21  1024       2097151     0x001FFFFF  3 bytes
+22-28  2097152    268435455   0x0FFFFFFF  4 bytes
+28-32  268435456  4294967295  0xFFFFFFFF  5 bytes
+*/
+
+data.Add(9, 256);
+
+uint value = data.Read(9);
+```
+
 ##### Abstract data serialization with Span:
 ```c#
 // Create a one-time allocation buffer pool
