@@ -191,7 +191,7 @@ Bits   Min Dec    Max Dec     Max Hex     Bytes Used
 8-14   128        1023        0x00003FFF  2 bytes
 15-21  1024       2097151     0x001FFFFF  3 bytes
 22-28  2097152    268435455   0x0FFFFFFF  4 bytes
-28-32  268435456  4294967295  0xFFFFFFFF  5 bytes
+29-32  268435456  4294967295  0xFFFFFFFF  5 bytes
 */
 
 data.Add(9, 256);
