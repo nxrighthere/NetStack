@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2018 Stanislav Denisov
+ *  Copyright (c) 2018 Stanislav Denisov, Maxim Munnig Schmidt
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -40,13 +40,12 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 #if ENABLE_MONO || ENABLE_IL2CPP
-using UnityEngine.Assertions;
-#else
-using System.Diagnostics;
+	using UnityEngine.Assertions;
 #endif
 
 namespace NetStack.Serialization {
