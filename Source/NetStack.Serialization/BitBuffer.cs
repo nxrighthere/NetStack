@@ -40,9 +40,14 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
+
+#if ENABLE_MONO || ENABLE_IL2CPP
+using UnityEngine.Assertions;
+#else
+using System.Diagnostics;
+#endif
 
 namespace NetStack.Serialization {
 	public class BitBuffer {
