@@ -183,7 +183,7 @@ QuantizedQuaternion rotation = new QuantizedQuaternion(data.ReadUInt(), data.Rea
 Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
 ```
 
-#### Bit-level operations
+##### Bit-level operations:
 ```c#
 /*
 Bits   Min Dec    Max Dec     Max Hex     Bytes Used
