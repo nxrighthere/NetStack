@@ -85,7 +85,7 @@ namespace NetStack.Serialization {
 		}
 
 		[MethodImpl(256)]
-		public void Add(int numBits, uint value) {
+		public BitBuffer Add(int numBits, uint value) {
 			#if ENABLE_MONO || ENABLE_IL2CPP
 				Assert.IsFalse(numBits < 0); // Pushing negative bits
 				Assert.IsFalse(numBits > 32); // Pushing too many bits
@@ -107,6 +107,8 @@ namespace NetStack.Serialization {
 			chunks[index] = (uint)result;
 			chunks[index + 1] = (uint)(result >> 32);
 			nextPosition += numBits;
+
+			return this;
 		}
 
 		[MethodImpl(256)]
