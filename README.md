@@ -44,7 +44,7 @@ Define `NETSTACK_BUFFERS_LOG` to enable buffers logging.
 
 Usage
 --------
-##### Thread-safe buffers pool:
+##### Thread-safe buffers pool
 ```c#
 // Create a new array pool with a maximum size of 1024 bytes per array, 50 arrays per bucket
 ArrayPool<byte> buffers = ArrayPool<byte>.Create(1024, 50);
@@ -63,7 +63,7 @@ for (int i = 0; i < buffer.Length; i++) {
 buffers.Return(buffer);
 ```
 
-##### Concurrent objects pool:
+##### Concurrent objects pool
 ```c#
 // Define a message object
 class MessageObject {
@@ -93,7 +93,7 @@ buffers.Return(message.data);
 messages.Release(message);
 ```
 
-##### Concurrent objects buffer:
+##### Concurrent objects buffer
 ```c#
 // Create a new concurrent buffer limited to 8192 cells
 ConcurrentBuffer conveyor = new ConcurrentBuffer(8192);
@@ -105,14 +105,14 @@ conveyor.Enqueue(message);
 MessageObject message = (MessageObject)conveyor.Dequeue();
 ```
 
-##### Quantize float:
+##### Quantize float
 ```c#
 ushort quantizedSpeed = HalfPrecision.Quantize(speed);
 
 float speed = HalfPrecision.Dequantize(quantizedSpeed);
 ```
 
-##### Quantize vector:
+##### Quantize vector
 ```c#
 // Create a new BoundedRange array for Vector3 position, each entry has bounds and precision
 BoundedRange[] worldBounds = new BoundedRange[3];
@@ -131,7 +131,7 @@ Console.WriteLine("Quantized position - X: " + quantizedPosition.x + ", Y:" + qu
 Vector3 dequantizedPosition = BoundedRange.Dequantize(quantizedPosition, worldBounds);
 ```
 
-##### Quantize quaternion:
+##### Quantize quaternion
 ```c#
 // Quantize rotation data ready for compact bit-packing 
 QuantizedQuaternion quantizedRotation = SmallestThree.Quantize(rotation);
@@ -143,7 +143,7 @@ Console.WriteLine("Quantized rotation - M: " + quantizedRotation.m + ", A:" + qu
 Quaternion rotation = SmallestThree.Dequantize(quantizedRotation);
 ```
 
-##### Serialize/deserialize data:
+##### Serialize/deserialize data
 ```c#
 // Create a new bit buffer with 1024 chunks, the buffer can grow automatically if required
 BitBuffer data = new BitBuffer(1024);
@@ -183,7 +183,7 @@ QuantizedQuaternion rotation = new QuantizedQuaternion(data.ReadUInt(), data.Rea
 Console.WriteLine("Bit buffer is empty: " + data.IsFinished);
 ```
 
-##### Bit-level operations:
+##### Bit-level operations
 ```c#
 /*
 Bits   Min Dec    Max Dec     Max Hex     Bytes Used
@@ -199,7 +199,7 @@ data.Add(9, 256);
 uint value = data.Read(9);
 ```
 
-##### Abstract data serialization with Span:
+##### Abstract data serialization with Span
 ```c#
 // Create a one-time allocation buffer pool
 static class BufferPool {
