@@ -1,8 +1,6 @@
 <p align="center"> 
-  <img src="https://i.imgur.com/jD77417.png" alt="alt logo">
+  <img src="https://i.imgur.com/TptiS3m.png" alt="alt logo">
 </p>
-
-[![PayPal](https://github.com/Rageware/Shields/blob/master/paypal.svg)](https://www.paypal.me/nxrighthere) [![Coinbase](https://github.com/Rageware/Shields/blob/master/coinbase.svg)](https://commerce.coinbase.com/checkout/03e11816-b6fc-4e14-b974-29a1d0886697)
 
 Lightweight toolset for creating concurrent networking systems for multiplayer games.
 
